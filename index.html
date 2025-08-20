@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mounesh Kodangal | AI & Web Developer</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0D0D0D; /* Pure black */
+            --secondary-color: #1A1A1A; /* Slightly lighter black for cards */
+            --accent-color: #6A0DAD; /* Electric Purple */
+            --text-color: #E0E0E0; /* Light grey for text */
+            --header-color: #FFFFFF; /* White for main headers */
+            --glow-color: rgba(106, 13, 173, 0.7);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--primary-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8A2BE2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Particle background */
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--header-color);
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--header-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--header-color);
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            color: var(--header-color);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero-content .subtitle {
+            font-size: 2rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 4rem;
+            color: var(--header-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px var(--glow-color);
+        }
+        
+        .skill-category h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .skill-category ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-category li {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .project-card h3 {
+            font-size: 1.6rem;
+            color: var(--header-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-card .tech-stack {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .project-card p {
+            line-height: 1.7;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Certifications Section */
+        .certifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .certification-item {
+            background: var(--secondary-color);
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .certification-item:hover {
+            transform: translateX(10px);
+            background-color: #2a2a2a;
+        }
+
+        .certification-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--header-color);
+        }
+
+        .certification-item p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        #contact p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+        }
+
+        .contact-btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s ease-in-out;
+            z-index: 1;
+        }
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 0.4s ease-in-out;
+            z-index: -1;
+        }
+        .contact-btn:hover {
+            color: var(--header-color);
+        }
+        .contact-btn:hover::before {
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--secondary-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease-in-out;
+                gap: 3rem;
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content .subtitle {
+                font-size: 1.5rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particle background container -->
+    <div id="tsparticles"></div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">M<span>.</span>K</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="gsap-reveal">Mounesh Kodangal</h1>
+                    <h2 class="gsap-reveal subtitle">AI Engineer & Full-Stack Developer</h2>
+                    <p class="gsap-reveal">
+                        Crafting intelligent, scalable solutions that bridge the gap between complex data and intuitive user experiences. Passionate about leveraging AI to solve real-world problems.
+                    </p>
+                    <div class="social-links gsap-reveal">
+                        <a href="https://github.com/Mounesh-13" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/mounesh13" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=work.mounesh@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title gsap-reveal">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text gsap-reveal">
+                        <p>
+                            I am a B.Tech student at MLR Institute of Technology, specializing in Artificial Intelligence and Machine Learning. My journey in technology is driven by a fascination with building intelligent systems that are both powerful and accessible.
+                        </p>
+                        <p>
+                            From developing production-ready semantic search engines to creating mobile apps that identify the natural world, I thrive on tackling complex challenges. I have hands-on experience across the full stack, from architecting backends with Node.js and Flask to designing dynamic frontends with React and React Native.
+                        </p>
+                        <p>
+                            I'm always eager to learn and apply new technologies, as demonstrated by my projects involving LangChain, Gemini LLM, and TensorFlow.js. My goal is to contribute to innovative projects that make a tangible impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title gsap-reveal">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category gsap-reveal">
+                        <h3><i class="fas fa-brain"></i> AI/ML</h3>
+                        <ul>
+                            <li>LangChain</li>
+                            <li>Gemini LLM</li>
+                            <li>TensorFlow.js</li>
+                            <li>Pandas</li>
+                            <li>Scikit-learn</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category gsap-reveal">
+                        <h3><i class="fas fa-code"></i> Web Technologies</h3>
+                        <ul>
+                            <li>Node.js</li>
+                            <li>Express</li>
+                            <li>React</li>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>Flask</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category gsap-reveal">
+                        <h3><i class="fas fa-laptop-code"></i> Languages</h3>
+                        <ul>
+                            <li>Python</li>
+                            <li>JavaScript</li>
+                            <li>SQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category gsap-reveal">
+                        <h3><i class="fas fa-database"></i> Databases</h3>
+                        <ul>
+                            <li>MongoDB</li>
+                            <li>PostgreSQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category gsap-reveal">
+                        <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+                        <ul>
+                            <li>Git & GitHub</li>
+                            <li>Linux (Ubuntu)</li>
+                            <li>VS Code</li>
+                            <li>Netlify & Vercel</li>
+                            <li>AWS S3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title gsap-reveal">Projects</h2>
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card gsap-reveal">
+                        <h3>AI Semantic Search Engine</h3>
+                        <p class="tech-stack">Flask, Gemini LLM, LangChain, React, SerpAPI, Material UI</p>
+                        <p>Architected a production-ready semantic search engine, leveraging Gemini LLM and LangChain for Perplexity-like query understanding and implemented RAG to fetch real-time web data.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Mounesh-13/Agentic_Semantic_Search" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card gsap-reveal">
+                        <h3>WildDiscover</h3>
+                        <p class="tech-stack">React Native, TensorFlow.js, Google Vision API, Gemini, MongoDB, AWS S3</p>
+                        <p>Developed a cross-platform mobile app to identify flora, fauna, and landmarks from images, integrating multiple AI APIs for high-accuracy classifications and enabling offline functionality.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Mounesh-13/WildDiscover" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="project-card gsap-reveal">
+                        <h3>IPL Winner Predictor</h3>
+                        <p class="tech-stack">Python, Flask, Pandas, Scikit-learn, Chart.js, Bootstrap</p>
+                        <p>Engineered a web app with an ML model that predicts IPL match outcomes with 75% accuracy, featuring a dynamic frontend with Chart.js for data visualization.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Mounesh-13/IPL_Winner_Predictor" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications">
+            <div class="container">
+                <h2 class="section-title gsap-reveal">Certifications</h2>
+                <div class="certifications-list">
+                    <div class="certification-item gsap-reveal">
+                        <div>
+                            <h3>Foundations of Prompt Engineering</h3>
+                            <p>AWS Training Certification</p>
+                        </div>
+                    </div>
+                    <div class="certification-item gsap-reveal">
+                        <div>
+                            <h3>Google Cloud Study Jam: Cloud Computing Generative AI</h3>
+                            <p>Google Cloud</p>
+                        </div>
+                    </div>
+                    <div class="certification-item gsap-reveal">
+                        <div>
+                            <h3>Career Essentials in GitHub Professional Certificate</h3>
+                            <p>GitHub</p>
+                        </div>
+                    </div>
+                    <div class="certification-item gsap-reveal">
+                        <div>
+                            <h3>Machine Learning with Python</h3>
+                            <p>freeCodeCamp</p>
+                        </div>
+                    </div>
+                    <div class="certification-item gsap-reveal">
+                        <div>
+                            <h3>Responsive Web Design</h3>
+                            <p>freeCodeCamp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title gsap-reveal">Get In Touch</h2>
+                <p class="gsap-reveal">
+                    I'm currently seeking new opportunities and am open to collaboration. Whether you have a question or just want to connect, feel free to reach out.
+                </p>
+                <a href="mailto:work.mounesh@gmail.com" class="contact-btn gsap-reveal">Say Hello</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Mounesh Kodangal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS Libraries -->
+    <!-- GSAP Core and ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- tsParticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // tsParticles Configuration
+            tsParticles.load("tsparticles", {
+                fpsLimit: 60,
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: "#6A0DAD"
+                    },
+                    shape: {
+                        type: "circle",
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#6A0DAD",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: false,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "grab"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push"
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_opacity: 1
+                        },
+                        push: {
+                            particles_nb: 4
+                        }
+                    }
+                },
+                retina_detect: true,
+            });
+
+            // GSAP Animations
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero Section Text Reveal
+            gsap.from(".hero-content .gsap-reveal", {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 0.5
+            });
+
+            // General Section Reveals on Scroll
+            const sections = document.querySelectorAll('.gsap-reveal');
+            sections.forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8,
+                    ease: "power3.out"
+                });
+            });
+
+            // Hamburger Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
